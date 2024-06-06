@@ -18,7 +18,32 @@ public class Traducator {
 
         try {
             while ((data = codeReader.readLine()) != null) {
-                data.split(" ");
+                String[] cuvinte = data.split(" ");
+                for (int i = 0; i < cuvinte.length; ++i) {
+                    String cuvant = cuvinte[i];
+                    switch (cuvant) {
+                        case "void":
+
+                        case "main()":
+                            System.out.print("public static void main(String[] args) {");
+                            System.out.print(" \n");
+                            break;
+                        case "std::cout":
+                            System.out.print('\t' + "System.out.print(");
+                            String input;
+                            for (int j = i + 2; j < cuvinte.length - 1; ++j) {
+                                input = cuvinte[j];
+                                System.out.print(input);
+                                System.out.print(' ');
+                            }
+                            System.out.println(");");
+                            break;
+                        case "}":
+                            System.out.print("}");
+                        default:
+                            break;
+                    }
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
